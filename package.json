@@ -1,0 +1,22 @@
+{
+  "name": "ip-geolocation-service",
+  "version": "1.0.0",
+  "description": "# Development environment",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosbaraza/ip-geolocation-service.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/carlosbaraza/ip-geolocation-service/issues"
+  },
+  "homepage": "https://github.com/carlosbaraza/ip-geolocation-service#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

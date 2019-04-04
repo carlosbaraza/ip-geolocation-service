@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 error() { echo -e "\e[91m$1\e[m"; exit 0; }
 success() { echo -e "\e[92m$1\e[m"; }
 
@@ -82,7 +80,7 @@ else
 fi
 
 sudo -u postgres psql -U postgres -d postgres -c "ALTER USER postgres WITH PASSWORD '$DBPASS';" > /dev/null
-sudo -u postgres psql -U postgres -d postgres -c 'DROP FUNCTION IF EXISTS inet_to_bigint(inet);CREATE OR REPLACE FUNCTION inet_to_bigint(inet) RETURNS bigint AS $$ SELECT $1 - inet '\''0.0.0.0'\'' $$ LANGUAGE SQL strict immutable;GRANT execute ON FUNCTION inet_to_bigint(inet) TO public;' > /dev/null
+sudo -u postgres psql -U postgres -d ip2location_database -c 'CREATE OR REPLACE FUNCTION inet_to_bigint(inet) RETURNS bigint AS $$ SELECT $1 - inet '\''0.0.0.0'\'' $$ LANGUAGE SQL strict immutable;GRANT execute ON FUNCTION inet_to_bigint(inet) TO public;' > /dev/null
 
 echo " > Setup completed"
 echo ""
@@ -95,8 +93,3 @@ echo ""
 # rm -rf /_tmp
 echo '' > /setup_done
 service postgresql stop >/dev/null 2>&1
-sleep 5
-
-cd
-
-su postgres -c "/usr/lib/postgresql/10/bin/postgres -D /var/lib/postgresql/10/main -c config_file=/etc/postgresql/10/main/postgresql.conf 2> /var/log/postgresql/postgresql-10-main.log"
