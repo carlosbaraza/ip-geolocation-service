@@ -90,6 +90,6 @@ echo "   psql -h HOST -p PORT --username=postgres"
 echo "   Enter the password '$DBPASS' when prompted"
 echo ""
 
-# rm -rf /_tmp
+rm -rf /_tmp
 echo '' > /setup_done
 service postgresql stop >/dev/null 2>&1
