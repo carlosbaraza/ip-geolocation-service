@@ -18,8 +18,6 @@ ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
 # Exposed ENV
-ENV TOKEN FALSE
-ENV CODE FALSE
 ENV POSTGRESQL_PASSWORD FALSE
 
 VOLUME ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]

@@ -5,10 +5,6 @@
 error() { echo -e "\e[91m$1\e[m"; exit 0; }
 success() { echo -e "\e[92m$1\e[m"; }
 
-if [ "$TOKEN" == "FALSE" ] || [ "$CODE" == "FALSE" ] || [ -f /setup_done ]; then
-	exit 0
-fi
-
 echo -n ' > Create directory /_tmp '
 mkdir /_tmp
 
@@ -17,7 +13,7 @@ mkdir /_tmp
 cd /_tmp
 
 echo -n ' > Download IP2Location package '
-wget -O database.zip -q --user-agent="Docker-IP2Location/PostgreSQL" http://www.ip2location.com/download?token=${TOKEN}\&productcode=${CODE} 2>&1
+wget -O database.zip -q --user-agent="Docker-IP2Location/PostgreSQL" https://download.ip2location.com/lite/IP2LOCATION-LITE-DB1.CSV.ZIP 2>&1
 
 [ ! -f database.zip ] && error '[ERROR]'
 
@@ -31,25 +27,10 @@ echo -n ' > Decompress downloaded package '
 
 unzip -q -o database.zip
 
-if [ "$CODE" == "DB1CSV" ]; then
-	CSV="$(find . -name 'IPCountry.csv')"
+CSV="$(find . -name 'IP2LOCATION-LITE-DB*.CSV')"
 
-elif [ "$CODE" == "DB2CSV" ]; then
-	CSV="$(find . -name 'IPISP.csv')"
+# CSV="$(find . -name 'IP2LOCATION-LITE-DB*.IPV6.CSV')"
 
-elif [ ! -z "$(echo $CODE | grep 'LITE')" ]; then
-	CSV="$(find . -name 'IP2LOCATION-LITE-DB*.CSV')"
-
-elif [ ! -z "$(echo $CODE | grep 'LITECSVIPV6')" ]; then
-	CSV="$(find . -name 'IP2LOCATION-LITE-DB*.IPV6.CSV')"
-
-elif [ ! -z "$(echo $CODE | grep 'CSVIPV6')" ]; then
-	CSV="$(find . -name 'IPV6-COUNTRY*.CSV')"
-
-else
-	CSV="$(find . -name 'IP-COUNTRY*.CSV')"
-
-fi
 
 [ -z "$CSV" ] && error '[ERROR]' || success '[OK]'
 
