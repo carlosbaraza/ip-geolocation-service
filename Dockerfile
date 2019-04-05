@@ -27,6 +27,10 @@ COPY .cachebust /tmp/cachebust
 RUN /app/container-scripts/setup.sh
 
 VOLUME ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
-# EXPOSE 5432 # Postgresql
+
+# Postgresql
+EXPOSE 5432 
+# Node
 EXPOSE 3000
+
 CMD ["/usr/bin/supervisord"]
