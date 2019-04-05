@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = 3000;
 const ipRexex = /(\d{1,3}\.){3}\d{1,3}/;
 
 const { Client } = require('pg');
