@@ -23,7 +23,9 @@ ADD . /app
 
 ENV POSTGRESQL_PASSWORD 345
 
+# Invalidate the cache because we want to get a fresh copy of the IP2Location Lite database
 COPY .cachebust /tmp/cachebust
+
 RUN /app/container-scripts/setup.sh
 
 VOLUME ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
